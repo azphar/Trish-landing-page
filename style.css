@@ -55,6 +55,35 @@ section {
     color: #c73619 !important;
 }
 
+.link__hover--effect {
+    position: relative;
+}
+
+.link__hover--effect:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 3px;
+    width: 0;
+    background-color: currentColor;
+    transition: width 300ms ease;
+}
+
+.link__hover--effect:hover:after {
+    width: 100%;
+}
+
+.link__hover--effect--white {
+    background-color: #242424;
+}
+
+.link__hover--effect--black {
+    background-color: #fff;
+}
+
+
+
 
 /* 
 
@@ -89,7 +118,7 @@ nav {
     margin-left: auto;
 }
 
-.nav__link {
+.nav-link {
     margin: 8px 24px; 
 }
 
@@ -216,6 +245,50 @@ LANDING PAGE
 
 /* 
 
+MODAL
+
+*/
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1100px;
+    height: 700px;
+    box-shadow: 0 20px 80px 0 rgb(0, 0, 0, 0.55);
+    border-radius: 20px;
+    overflow: hidden; 
+    display: flex;
+}
+
+.modal__half {
+    flex: 1 1 50%;    
+}
+
+.modal__about {
+    background-color: rgb(245, 245, 245);
+}
+
+.modal__languages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal__language {
+    width: 25%;
+    padding: 16px;
+}
+
+.modal__contact {
+    background-color: #242424;
+}
+
+.modal__language--img
+
+/* 
+
 PROJECTS 
 
 */
@@ -228,6 +301,12 @@ PROJECTS
 
 .project__img {
     width: 100%;
+    transition: all 600ms ease;
+}
+
+.project:hover .project__img {
+    transform: scale(1.07);
+    filter: blur(5px);
 }
 
 .project__wrapper {
@@ -299,7 +378,7 @@ FOOTER
 
 footer {
     background-color: #242424;
-    display: flex;
+    color: #fff;
 }
 
 footer__container {
@@ -312,21 +391,37 @@ footer__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 20px; 
+    padding: 48px 0;
 }
 
 .footer__logo--img {
     width: 70px;
 }
 
-.footer__social--link {
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    justify-content: space-around;
-    margin: 28px 0;
+.footer__social--list {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 28px 0;
 }
 
-.footer__social--link,
 .footer__copyright {
-    color: white;
+    color: #fff;
 }
+
+.footer__social__link {
+  color: inherit;          
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer__social__link:visited { color: inherit; }
+.footer__social__link:hover { opacity: 0.9; }
+
+
+
+
