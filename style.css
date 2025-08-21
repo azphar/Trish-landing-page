@@ -269,6 +269,35 @@ MODAL
   z-index: 1000;
 }
 
+.modal > .modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #242424;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 200ms ease;
+  z-index: 1100;
+}
+
+.modal > .modal__close:hover { 
+    opacity: 0.8;
+ }
+.modal > .modal__close:focus-visible { 
+    outline: 2px solid #000; 
+    outline-offset: 2px; 
+}
+
+.modal__contact .modal__close,
+.modal > .modal__close.on-dark {
+  color: #fff;
+}
+
+
 .modal--open {
     opacity: 1;
     pointer-events: auto;
@@ -312,6 +341,37 @@ MODAL
 }
 
 .modal__language--img
+
+/* Close button inside modal */
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #242424;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 200ms ease;
+  z-index: 1100; /* ensures it sits above modal content */
+}
+
+.modal__close:hover {
+  opacity: 0.8;
+}
+
+.modal__close:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* If you put a close button on the dark (contact) side of the modal */
+.modal__contact .modal__close {
+  color: #fff;
+}
+
 
 /* 
 
