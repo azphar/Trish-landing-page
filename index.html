@@ -6,12 +6,21 @@
   <title>Trish Harris</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/c7dbcbafbf.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+   (function() {
+      emailjs.init("user_gMpKGYZUbmhQaUNsdY");
+   })();
+</script>
 </head>
 <body>
   <section id="landing-page">
     <nav>
       <figure>
-        <img id="personal-logo" src="./assets/logo.svg" alt="logo" />
+        <img id="personal-logo" src="./assets/initials-logo.svg" alt="logo" />
       </figure>
       <ul class="nav_link--list">
         <li class="nav-link">
@@ -98,19 +107,18 @@
   <div class="modal__half modal__contact">
     <h3 class="modal__title">Let's have a chat!</h3>
     <h4 class="modal__subtitle">Always open to new creative opportunities</h4>
-
-    <form id="contact__form" novalidate>
+    <form id="contact__form" onsubmit="contact(event)">
       <div class="form__item">
         <label for="name">Name</label>
-        <input id="name" class="input" name="user_name" type="text" required>
+        <input id="name" class="input" name="user_name" type="text">
       </div>
       <div class="form__item">
         <label for="email">Email</label>
-        <input id="email" class="input" name="user_email" type="email" required>
+        <input id="email" class="input" name="user_email" type="email">
       </div>
       <div class="form__item">
         <label for="message">Message</label>
-        <textarea id="message" class="input" name="message" required></textarea>
+        <textarea id="message" class="input" name="message"></textarea>
       </div>
       <button id="contact__submit" class="form__submit" type="submit">Send it my way</button>
     </form>
@@ -178,6 +186,6 @@
       </div>
     </div>
   </footer>
-  <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 </html>

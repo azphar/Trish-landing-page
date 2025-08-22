@@ -1,19 +1,23 @@
+// template_ffw0jnp
+// service_wnn6l1s
+// gMpKGYZUbmhQaUNsd
+
 (function () {
   const modal   = document.getElementById('contactModal');
   const openBtn = document.querySelector('.mail__btn');
+  const closeBtn = modal?.querySelector('.modal__close');
+  const form     = modal?.querySelector('#contact__form');
 
-  if (!modal || !openBtn) return; // only hard requirements
+  // Inputs & overlays
+  const nameEl  = form?.querySelector('#name');
+  const loading = modal?.querySelector('.modal__overlay--loading');
+  const success = modal?.querySelector('.modal__overlay--success');
 
-  const closeBtn = modal.querySelector('.modal__close');         // optional
-  const form     = modal.querySelector('#contact__form');        // optional
-  const nameEl   = form?.querySelector('#name');
-  const emailEl  = form?.querySelector('#email');
-  const msgEl    = form?.querySelector('#message');
-  const loading  = modal.querySelector('.modal__overlay--loading');
-  const success  = modal.querySelector('.modal__overlay--success');
+  // If neither modal nor form exists, bail
+  if (!modal && !form) return;
 
   let lastFocused = null;
-  let canClose = true; // default: allow closing unless you gate it later
+  let canClose = true;
 
   function openModal() {
     lastFocused = document.activeElement;
@@ -37,7 +41,9 @@
     if (e.key === 'Escape') { closeModal(); return; }
     if (e.key === 'Tab') {
       const focusables = Array.from(
-        modal.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')
+        modal.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
       ).filter(el => el.offsetParent !== null);
       if (!focusables.length) return;
       const first = focusables[0], last = focusables[focusables.length - 1];
@@ -46,26 +52,45 @@
     }
   }
 
-  // open
-  openBtn.addEventListener('click', openModal);
-
-  // close (if the button exists)
+  // Open/close hooks (only if those elements exist)
+  openBtn?.addEventListener('click', openModal);
   closeBtn?.addEventListener('click', closeModal);
-
-  // backdrop & [data-close-modal]
-  modal.addEventListener('click', (e) => {
+  modal?.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
     if (e.target.closest?.('[data-close-modal]')) closeModal();
   });
 
-  // optional submit handling (only if form exists)
-  form?.addEventListener('submit', (e) => {
+  // SUBMIT HANDLER
+  async function contact(e) {
     e.preventDefault();
-    loading?.classList.add('is-active');
-    setTimeout(() => {
+    if (!form) return;
+
+    try {
+      // show loading, block closing while sending
+      canClose = false;
+      loading?.classList.add('is-active');
+
+      // EmailJS v4 signature: (serviceID, templateID, form, { publicKey })
+      await emailjs.sendForm(
+        'service_wnn61ls',
+        'template_ffw0jnp',
+        form,
+        { publicKey: 'user_gMpKGYZUbmhQaUNsd' } // <-- your key (or move to emailjs.init)
+      );
+
+      // hide loading, show green success, clear form
       loading?.classList.remove('is-active');
       success?.classList.add('is-active');
-      // canClose = true; // keep or change gating logic here
-    }, 800);
-  });
+      form.reset();
+
+    } catch (err) {
+      loading?.classList.remove('is-active');
+      console.error('Email send failed:', err);
+      alert('Sorry—sending failed. Check console for details.');
+    } finally {
+      canClose = true;
+    }
+  }
+
+  form?.addEventListener('submit', contact);
 })();
