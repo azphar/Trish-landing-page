@@ -1,0 +1,13 @@
+<svg width="320" height="340" viewBox="0 0 256 300" xmlns="http://www.w3.org/2000/svg" aria-label="TH monogram logo (soft, right-shortened)">
+  <rect width="256" height="300" fill="#ffffff"/>
+  <g fill="#111111">
+    <!-- T horizontal (left edge fixed, right shortened to be symmetric) -->
+    <rect x="32" y="28" width="152" height="24" rx="10"/>
+    <!-- Shared stem -->
+    <rect x="96" y="28" width="24" height="210" rx="10"/>
+    <!-- H right vertical -->
+    <rect x="172" y="96" width="24" height="142" rx="10"/>
+    <!-- H crossbar -->
+    <rect x="96" y="152" width="100" height="22" rx="10"/>
+  </g>
+</svg>
