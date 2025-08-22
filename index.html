@@ -7,39 +7,48 @@
 
   <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/c7dbcbafbf.js" crossorigin="anonymous"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     emailjs.init({ publicKey: 'gMpKGYZUbmhQaUNsd' });
   </script>
-  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <section id="landing-page">
+  <section id="landing-page" onmousemove="moveBackground(event)">
     <nav>
       <figure>
         <img id="personal-logo" src="./assets/initials-logo.svg" alt="logo" />
       </figure>
       <ul class="nav_link--list">
-        <li class="nav-link">
-          <a href="#" class="nav__link--anchor link__hover--effect link__hover--effect--black">About</a>
+        <li class="nav-link" onclick="toggleModal">
+          <a href="#" class="
+          nav__link--anchor 
+          link__hover--effect 
+          link__hover--effect--black">About</a>
         </li>
-        <li class="nav-link">
-          <a href="#" class="nav__link--anchor link__hover--effect link__hover--effect--black">Projects</a>
+        <li class="nav-link" onclick="toggleModal">
+          <a href="#" class="
+          nav__link--anchor 
+          link__hover--effect 
+          link__hover--effect--black">Projects</a>
         </li>
-        <li class="nav-link">
-          <a href="#" class="nav__link--anchor link__hover--effect link__hover--effect--black">Contact</a>
+        <li class="nav-link" onclick="toggleModal">
+          <a href="#" class="
+          nav__link--anchor 
+          link__hover--effect 
+          link__hover--effect--black">Contact</a>
         </li>
-        <li class="nav-link">
-          <a href="#" class="nav__link--anchor link__hover--effect link__hover--effect--black" aria-label="Toggle theme">
-            <i class="fa-solid fa-circle-half-stroke"></i>
+        <li class="nav-link click" onclick="toggleContrast()">
+          <a href="#" class="
+          nav__link--anchor 
+          link__hover--effect 
+          link__hover--effect--black" aria-label="Toggle theme">
+          <i class="fa-solid fa-circle-half-stroke"></i>
           </a>
         </li>
       </ul>
     </nav>
-
-    <header class="header">
+  <header class="header">
       <div class="header__content">
         <h1 class="title">Hey</h1>
         <h1 class="title title-secondary">I'm <span class="accent">Trish.</span></h1>
@@ -47,7 +56,7 @@
           I'm a <b class="accent">Frontend Software Engineer</b> with a strong passion for building web applications
           with great user experiences.
           <br />
-          Here's a bit more <b class="accent">about me</b>.
+          Here's a bit more <b class="accent" onclick="toggleModal()">about me</b>.
         </p>
         <ul class="socials">
           <li>
@@ -68,21 +77,20 @@
         </ul>
       </div>
     </header>
-
-    <button class="mail__btn click" aria-haspopup="dialog" aria-controls="contactModal">
+    <a href="#">
+    <button class="mail__btn click" onclick="toggleModal()">
       <i class="fa-solid fa-envelope"></i>
     </button>
-
-    <a href="#projects" class="scroll" aria-label="Scroll to projects">
+ <a href="#projects" class="scroll" aria-label="Scroll to projects">
       <div class="scroll__icon click"></div>
     </a>
-
     <div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true">
   <button class="modal__close" type="button" aria-label="Close modal" data-close-modal>
     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
   </button>
 
   <div class="modal__half modal__about">
+    <i class="fas fa-times modal__exit click" onclick="toggleModal()"></i>
     <h3 class="modal__title">Here's a bit about me.</h3>
     <h4 class="modal__subtitle">Frontend Software engineer</h4>
     <p class="modal__para">
@@ -131,6 +139,15 @@
   </div>
 </div>
 </div>
+<img src="./assets/semi circle.svg" class="shape shape--0">
+<img src="./assets/circle.svg" class="shape shape--1">
+<img src="./assets/squiggly.svg" class="shape shape--2">
+<img src="./assets/triangle.svg" class="shape shape--3">
+<img src="./assets/circle.svg" class="shape shape--4">
+<img src="./assets/squiggly.svg" class="shape shape--5">
+<img src="./assets/semi circle.svg" class="shape shape--6">
+<img src="./assets/triangle.svg" class="shape shape--7">
+<img src="./assets/semi circle.svg" class="shape shape--8">
 </section>
   <section id="projects">
     <div class="row">
@@ -169,16 +186,38 @@
     <div class="container">
       <div class="row footer__row">
         <figure class="footer__logo">
-          <img class="footer__logo--img" src="./assets/logo.svg" alt="Trish Harris logo" />
+          <img class="footer__logo--img" src="./assets/initials-logo.svg" alt="Trish Harris logo" />
         </figure>
 
         <div class="footer__social--list">
-          <a href="#" class="footer__social__link">Github</a>
-          <a href="#" class="footer__social__link">LinkedIn</a>
-          <a href="mailto:you@example.com" class="footer__social__link">Email</a>
-          <a href="#" class="footer__social__link">Resume</a>
+          <a href="#" class="
+          footer__social__link
+          link__hover--effect
+          link__hover--effect--white
+          ">
+          Github
+        </a>
+          <a href="#" class="
+          footer__social__link
+          link__hover--effect
+          link__hover--effect--white
+          ">
+          LinkedIn
+        </a>
+          <a href="mailto:you@example.com" class="
+          footer__social__link
+          link__hover--effect
+          link__hover--effect--white
+          ">
+          Contact
+        </a>
+          <a href="./assets/Example_Resume.pdf" target="blank" class="
+          footer__social__link
+          link__hover--effect
+          link__hover--effect--white
+          ">Resume
+        </a>"
         </div>
-
         <div class="footer__copyright">
           © <time datetime="2025">2025</time> Trish Harris, All rights reserved.
         </div>
@@ -186,5 +225,6 @@
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

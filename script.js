@@ -1,20 +1,46 @@
-// template_ffw0jnp
+// template_e88dr73
 // service_wnn6l1s
 // gMpKGYZUbmhQaUNsd
 
-(function () {
-  const modal   = document.getElementById('contactModal');
-  const openBtn = document.querySelector('.mail__btn');
-  const closeBtn = modal?.querySelector('.modal__close');
-  const form     = modal?.querySelector('#contact__form');
+emailjs.init({ publicKey: 'gMpKGYZUbmhQaUNsd' });
 
-  // Inputs & overlays
-  const nameEl  = form?.querySelector('#name');
-  const loading = modal?.querySelector('.modal__overlay--loading');
-  const success = modal?.querySelector('.modal__overlay--success');
+let isModalOpen = false;
+let contrastToggle= false;
+const scaleFactor = 1 / 20;
 
-  // If neither modal nor form exists, bail
-  if (!modal && !form) return;
+function moveBackground(event) {
+  const shapes = document.querySelectorAll(".shape");
+  const x = event.clientX * scaleFactor;
+  const y = event.clientY * scaleFactor;
+
+  for (let i = 0; i < shapes.length; ++i) {
+    const isOdd = i % 2 !== 0;
+    const boolInt = isOdd ? -1 : 1;
+    shapes[i].style.transform = `translate(${x * boolInt}px, ${y * boolInt}px)`;
+  }
+}
+
+function toggleContrast() {
+  contrastToggle = !contrastToggle;
+  if (contrastToggle) {
+  document.body.classList += " dark-theme"
+}
+  else {
+    document.body.classList.remove("dark-theme")
+  }
+}
+
+(() => {
+  const modal    = document.getElementById('contactModal');
+  if (!modal) return; 
+
+  const openBtn  = document.querySelector('.mail__btn');
+  const closeBtn = modal.querySelector('.modal__close');
+  const form     = modal.querySelector('#contact__form');
+
+  const nameEl   = form?.querySelector('#name');
+  const loading  = modal.querySelector('.modal__overlay--loading');
+  const success  = modal.querySelector('.modal__overlay--success');
 
   let lastFocused = null;
   let canClose = true;
@@ -34,8 +60,21 @@
     document.removeEventListener('keydown', onKeyDown);
     loading?.classList.remove('is-active');
     success?.classList.remove('is-active');
-    lastFocused && lastFocused.focus?.();
+    lastFocused?.focus?.();
   }
+
+ 
+  function toggleModal() {
+    if (isModalOpen) {
+      isModalOpen = false;
+      return document.body.classList.remove("modal--open");
+    }
+    isModalOpen = true;
+    document.body.classList += " modal--open";
+  }
+
+
+
 
   function onKeyDown(e) {
     if (e.key === 'Escape') { closeModal(); return; }
@@ -46,43 +85,32 @@
         )
       ).filter(el => el.offsetParent !== null);
       if (!focusables.length) return;
-      const first = focusables[0], last = focusables[focusables.length - 1];
-      if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      if ( e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      const first = focusables[0];
+      const last  = focusables[focusables.length - 1];
+      if (!e.shiftKey && document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      if ( e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus();  }
     }
   }
 
-  // Open/close hooks (only if those elements exist)
   openBtn?.addEventListener('click', openModal);
   closeBtn?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-    if (e.target.closest?.('[data-close-modal]')) closeModal();
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target.closest('[data-close-modal]')) closeModal();
   });
 
-
-  async function contact(e) {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!form) return;
 
     try {
-      // show loading, block closing while sending
       canClose = false;
       loading?.classList.add('is-active');
 
-      // EmailJS v4 signature: (serviceID, templateID, form, { publicKey })
-      await emailjs.sendForm(
-        'service_wnn61ls',
-        'template_ffw0jnp',
-        form,
-        { publicKey: 'gMpKGYZUbmhQaUNsd' } // <-- your key (or move to emailjs.init)
-      );
+      await emailjs.sendForm('service_wnn6l1s', 'template_e88dr73', form);
 
-      // hide loading, show green success, clear form
       loading?.classList.remove('is-active');
       success?.classList.add('is-active');
       form.reset();
-
     } catch (err) {
       loading?.classList.remove('is-active');
       console.error('Email send failed:', err);
@@ -90,7 +118,5 @@
     } finally {
       canClose = true;
     }
-  }
-
-  form?.addEventListener('submit', contact);
+  });
 })();

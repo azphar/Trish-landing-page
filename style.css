@@ -7,6 +7,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 li {
     list-style-type: none;
 }
@@ -26,6 +30,7 @@ button {
 
 section {
     background-color: rgb(245, 245, 245);
+    transition: all 300ms ease;
 }
 
 input, textarea {
@@ -60,6 +65,7 @@ input:hover, textarea:hover {
 input:focus, textarea:focus {
     border-color: #f06449;
 }
+
 
 #personal-logo {
     width: 50px;
@@ -122,6 +128,57 @@ input:focus, textarea:focus {
     color: #242424;
 }
 
+nav,
+.scroll,
+.header {
+    opacity: 1;
+    visibility: visible;
+    transition: all 600ms;
+}
+
+.modal--open nav,
+.modal--open .scroll,
+.modal--open .header {
+    opacity: 0;
+    visibility: hidden;
+    transform: all 400ms;
+}
+
+.dark-theme .title,
+.dark-theme .section__title,
+.dark-theme .section__sub-title,
+.dark-theme .nav__link--anchor,
+.dark-theme .fa-solid fa-circle-half-stroke,
+.dark-theme .header__para
+{
+    color: white;
+}
+
+.dark-theme section {
+    background-color: #242424;
+}
+
+.dark-theme #personal-logo {
+    filter: none;
+}
+
+.dark-theme .scroll-icon {
+    background-color: white;
+}
+
+.dark-theme .scroll__icon:after,
+.dark-theme .link__hover--effect--black:after {
+    background-color: white;
+}
+
+.dark-theme .link__hover--effect--white:after {
+    background-color: #242424;
+}
+
+.dark-theme .mail__btn {
+    background-color: white;
+    color: #242424;
+}
 
 
 
@@ -300,7 +357,7 @@ MODAL
   display: flex;
   flex-direction: row;
   border-radius: 20px;
-  background: #fff; /* base (left panel) */
+  background: #fff; 
   box-shadow: 0 20px 80px rgba(0,0,0,.55);
   overflow: hidden;
   opacity: 0;
@@ -309,6 +366,7 @@ MODAL
   transition: opacity .2s ease, transform .2s ease;
   z-index: 1000;
 }
+
 .modal--open {
   opacity: 1;
   pointer-events: auto;
@@ -322,10 +380,24 @@ MODAL
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;        
+  position: relative;   
+  transition: all 300ms ease-in;     
 }
-.modal__about   { background: #f5f5f5; }
-.modal__contact { background: #242424; color: #fff; min-height: 240px; }
+
+.modal--open .modal__about,
+.modal--open .modal__contact {
+    transform: translateX(0%);
+}
+
+.modal__about   { 
+    background: #f5f5f5; 
+    transform: translateX(-110%);
+}
+.modal__contact { 
+    background: #242424; 
+    color: #fff; 
+    transform: translateX(110%);
+}
 
 
 .modal > .modal__close {
@@ -344,7 +416,7 @@ MODAL
 .modal__overlay {
   position: absolute; 
   inset: 0;
-  display: flex; 
+  display: none; 
   align-items: center; 
   justify-content: center;
   opacity: 0; 
@@ -472,6 +544,52 @@ PROJECTS
     margin: 16px 0;
 }
 
+/*
+
+SHAPES 
+
+*/
+
+.shape {
+    position: fixed;
+}
+.shape--0 {
+    top: 15vh;
+    left: 5vw;
+}
+.shape--1 {
+    top: 15vh;
+    left: 50vw;
+}
+.shape--3 {
+    top: 15vh; 
+    left: 80w;
+}
+.shape--4 {
+    top: 50vh;
+    left: 5vw;
+}
+.shape--5 {
+    top: 50vh;
+    left: 50vw;
+}
+.shape--6 {
+    top: 50vh;
+    left: 80vw;
+}
+.shape--7 {
+    top: 80vh;
+    left: 5vw;
+}
+.shape--8 {
+    top: 80vh;
+    left: 50vw;
+}
+.shape--9 {
+    top: 80vh;
+    left: 80vw;
+}
+
 /* 
 
 FOOTER
@@ -479,7 +597,9 @@ FOOTER
 */
 
 footer {
+    position: relative;
     background-color: #242424;
+    display: flex;
     color: #fff;
 }
 
@@ -550,10 +670,10 @@ footer .container {
 .footer__social__link:visited { color: #fff; }
 .footer__social__link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
-/* Mobile / small screens: stack vertically */
+
 @media (max-width: 768px) {
   .modal {
-    flex-direction: column;   /* stack about + contact */
+    flex-direction: column;   
     width: 95%;
     height: auto;
     max-height: 90vh;
@@ -578,11 +698,6 @@ footer .container {
     justify-items: center;
   }
 }
-
-  /* optional: give the dark side a minimum height so it feels balanced */
-  .modal__contact {
-    min-height: 240px;
-  }
 
 
   .modal__title     { font-size: 20px; margin-bottom: 6px; }
@@ -615,6 +730,4 @@ footer .container {
   }
 
 }
-
-
 
