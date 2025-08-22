@@ -60,7 +60,7 @@
     if (e.target.closest?.('[data-close-modal]')) closeModal();
   });
 
-  // SUBMIT HANDLER
+
   async function contact(e) {
     e.preventDefault();
     if (!form) return;
@@ -75,7 +75,7 @@
         'service_wnn61ls',
         'template_ffw0jnp',
         form,
-        { publicKey: 'user_gMpKGYZUbmhQaUNsd' } // <-- your key (or move to emailjs.init)
+        { publicKey: 'gMpKGYZUbmhQaUNsd' } // <-- your key (or move to emailjs.init)
       );
 
       // hide loading, show green success, clear form
