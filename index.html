@@ -20,8 +20,8 @@
         <img id="personal-logo" src="./assets/initials-logo.svg" alt="logo" />
       </figure>
       <ul class="nav_link--list">
-        <li class="nav-link" onclick="toggleModal">
-          <a href="#" class="
+        <li class="nav-link">
+          <a href="#" onclick="openModal()" class="
           nav__link--anchor 
           link__hover--effect 
           link__hover--effect--black">About</a>
@@ -33,7 +33,7 @@
           link__hover--effect--black">Projects</a>
         </li>
         <li class="nav-link" onclick="toggleModal">
-          <a href="#" class="
+          <a href="#" onclick="openModal()" class="
           nav__link--anchor 
           link__hover--effect 
           link__hover--effect--black">Contact</a>
@@ -204,7 +204,7 @@
           ">
           LinkedIn
         </a>
-          <a href="mailto:you@example.com" class="
+          <a href="#" onclick="openModal()" class="
           footer__social__link
           link__hover--effect
           link__hover--effect--white

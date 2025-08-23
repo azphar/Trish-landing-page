@@ -23,12 +23,12 @@ function moveBackground(event) {
 function toggleContrast() {
   contrastToggle = !contrastToggle;
   if (contrastToggle) {
-  document.body.classList += " dark-theme"
-}
-  else {
-    document.body.classList.remove("dark-theme")
+    document.body.classList.add("dark-theme");
+  } else {
+    document.body.classList.remove("dark-theme");
   }
 }
+
 
 (() => {
   const modal    = document.getElementById('contactModal');
@@ -53,6 +53,8 @@ function toggleContrast() {
     document.addEventListener('keydown', onKeyDown);
   }
 
+  window.openModal = openModal;
+
   function closeModal() {
     if (!canClose) return;
     modal.classList.remove('modal--open');
@@ -64,14 +66,17 @@ function toggleContrast() {
   }
 
  
-  function toggleModal() {
-    if (isModalOpen) {
-      isModalOpen = false;
-      return document.body.classList.remove("modal--open");
-    }
+function toggleModal() {
+  if (isModalOpen) {
+    isModalOpen = false;
+    modal.classList.remove("modal--open");
+  } else {
     isModalOpen = true;
-    document.body.classList += " modal--open";
+    modal.classList.add("modal--open");
   }
+}
+window.toggleModal = toggleModal; 
+
 
 
 
